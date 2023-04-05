@@ -15,8 +15,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.dbConnection = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const dbConnection = () => __awaiter(void 0, void 0, void 0, function* () {
-    const mongoConnection = 'mongodb+srv://pbottino:1234@cluster0.30zkc.mongodb.net/workersJuan';
-    console.log('mognoC', mongoConnection);
+    var _a;
+    const mongoConnection = (_a = process.env.MONGO_URL) !== null && _a !== void 0 ? _a : '';
     try {
         mongoose_1.default.connect(mongoConnection);
         console.log('Base de datos online');
