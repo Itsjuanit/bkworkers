@@ -27,6 +27,14 @@ const createTag = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.createTag = createTag;
 const getTag = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { name } = req.query;
+    if (name) {
+        const tags = yield tag_1.Tag.find({ name });
+        if (!tags.length) {
+            return res.json({ msg: 'la busqueda no arrojo resultados' });
+        }
+        return res.json({ tags });
+    }
     const tags = yield tag_1.Tag.find();
     res.json({ tags });
 });

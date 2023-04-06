@@ -21,6 +21,15 @@ export const createTag = async (req: Request,res: Response) => {
 
 export const getTag = async (req: Request,res: Response) => {
     
+	const {name} = req.query
+
+	if(name){
+		const tags = await Tag.find({name})
+		if(!tags.length){
+			return res.json({msg: 'la busqueda no arrojo resultados'})
+		}
+		return res.json({tags})
+	}
 	const tags = await Tag.find()
 	res.json({tags})
 }
