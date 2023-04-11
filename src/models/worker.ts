@@ -1,13 +1,13 @@
 import {Schema, model} from 'mongoose'
 interface IWorker {
     name: string,
-    phone_number: number,
+    phone_number: string,
     opinion: string,
     tag: { type: Schema.Types.ObjectId, ref: 'Tag' },
 }
 const WorkerSchema = new Schema<IWorker>({
 	name: {type: String},
-    phone_number: {type: Number},
+    phone_number: {type: String},
     opinion:  {type: String},
     tag: { type: Schema.Types.ObjectId, ref: 'Tag' },
 })

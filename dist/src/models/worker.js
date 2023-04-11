@@ -15,7 +15,7 @@ exports.Worker = void 0;
 const mongoose_1 = require("mongoose");
 const WorkerSchema = new mongoose_1.Schema({
     name: { type: String },
-    phone_number: { type: Number },
+    phone_number: { type: String },
     opinion: { type: String },
     tag: { type: mongoose_1.Schema.Types.ObjectId, ref: 'Tag' },
 });
