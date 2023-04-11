@@ -22,7 +22,7 @@ export const createWorker = async (req: Request,res: Response) => {
 
 export const getWorker = async (req: Request,res: Response) => {
     
-	const worker = await Worker.find()
+	const worker = await Worker.find().populate('tag', 'name')  
 	res.json({worker})
 }
 

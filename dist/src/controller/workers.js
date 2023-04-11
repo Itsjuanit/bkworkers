@@ -27,7 +27,7 @@ const createWorker = (req, res) => __awaiter(void 0, void 0, void 0, function* (
 });
 exports.createWorker = createWorker;
 const getWorker = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const worker = yield worker_1.Worker.find();
+    const worker = yield worker_1.Worker.find().populate('tag', 'name');
     res.json({ worker });
 });
 exports.getWorker = getWorker;
