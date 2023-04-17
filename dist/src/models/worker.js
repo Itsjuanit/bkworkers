@@ -17,6 +17,7 @@ const WorkerSchema = new mongoose_1.Schema({
     name: { type: String },
     phone_number: { type: String },
     opinion: { type: String },
+    status: { type: String, default: 'inactive' },
     tag: { type: mongoose_1.Schema.Types.ObjectId, ref: 'Tag' },
 });
 WorkerSchema.methods.toJSON = function () {

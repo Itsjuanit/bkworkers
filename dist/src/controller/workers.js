@@ -27,15 +27,22 @@ const createWorker = (req, res) => __awaiter(void 0, void 0, void 0, function* (
 });
 exports.createWorker = createWorker;
 const getWorker = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const worker = yield worker_1.Worker.find().populate('tag', 'name');
-    res.json({ worker });
+    const { status } = req.query;
+    if (status) {
+        const worker = yield worker_1.Worker.find({ status }).populate('tag', 'name');
+        res.json({ worker });
+    }
+    else {
+        const worker = yield worker_1.Worker.find().populate('tag', 'name');
+        res.json({ worker });
+    }
 });
 exports.getWorker = getWorker;
 const updateWorker = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
-    const { name, tag, phone_number, opinion } = req.body;
+    const { name, tag, phone_number, opinion, status } = req.body;
     try {
-        const worker = worker_1.Worker.findByIdAndUpdate(id, { name, tag, phone_number, opinion }, { new: true });
+        const worker = worker_1.Worker.findByIdAndUpdate(id, { name, tag, phone_number, opinion, status }, { new: true });
         res.json({
             msg: 'worker updated',
             worker

@@ -21,9 +21,16 @@ export const createWorker = async (req: Request,res: Response) => {
 }
 
 export const getWorker = async (req: Request,res: Response) => {
+	const {status} = req.query
+	if(status) {
+		const worker = await Worker.find({status}).populate('tag', 'name')  	
+		res.json({worker})
+	}else {
+		const worker = await Worker.find().populate('tag', 'name')  
+		res.json({worker})
+
+	}
     
-	const worker = await Worker.find().populate('tag', 'name')  
-	res.json({worker})
 }
 
 
@@ -31,10 +38,10 @@ export const updateWorker = async (req: Request, res: Response) => {
 
     const {id} = req.params; 
 
-    const {name, tag, phone_number, opinion} = req.body
+    const {name, tag, phone_number, opinion, status} = req.body
 
     try {
-        const worker = Worker.findByIdAndUpdate(id, {name, tag, phone_number, opinion}, {new: true})
+        const worker = Worker.findByIdAndUpdate(id, {name, tag, phone_number, opinion, status}, {new: true})
 
 		res.json({
 			msg: 'worker updated',

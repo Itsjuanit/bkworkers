@@ -3,12 +3,16 @@ interface IWorker {
     name: string,
     phone_number: string,
     opinion: string,
+    status: Status,
     tag: { type: Schema.Types.ObjectId, ref: 'Tag' },
 }
+
+type Status = 'active' | 'inactive' | 'reject'
 const WorkerSchema = new Schema<IWorker>({
 	name: {type: String},
     phone_number: {type: String},
     opinion:  {type: String},
+    status:  {type: String, default: 'inactive'},
     tag: { type: Schema.Types.ObjectId, ref: 'Tag' },
 })
 
