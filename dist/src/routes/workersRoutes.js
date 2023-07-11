@@ -9,5 +9,6 @@ const router = express_1.default.Router();
 router.get('/', workers_1.getWorker);
 router.post('/', workers_1.createWorker);
 router.put('/:id', workers_1.updateWorker);
+router.patch('/:id', workers_1.updateStatus);
 exports.default = router;
 //# sourceMappingURL=workersRoutes.js.map

@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateWorker = exports.getWorker = exports.createWorker = void 0;
+exports.updateStatus = exports.updateWorker = exports.getWorker = exports.createWorker = void 0;
 const worker_1 = require("../models/worker");
 const createWorker = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { name, tag, phone_number, opinion } = req.body;
@@ -39,10 +39,11 @@ const getWorker = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.getWorker = getWorker;
 const updateWorker = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log(req);
     const { id } = req.params;
     const { name, tag, phone_number, opinion, status } = req.body;
     try {
-        const worker = worker_1.Worker.findByIdAndUpdate(id, { name, tag, phone_number, opinion, status }, { new: true });
+        const worker = yield worker_1.Worker.findByIdAndUpdate(id, { name, tag, phone_number, opinion, status }, { new: true });
         res.json({
             msg: 'worker updated',
             worker
@@ -53,4 +54,19 @@ const updateWorker = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     }
 });
 exports.updateWorker = updateWorker;
+const updateStatus = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
+    const { status } = req.body;
+    try {
+        const worker = yield worker_1.Worker.findByIdAndUpdate(id, { status }, { new: true });
+        res.json({
+            msg: 'worker changed status',
+            worker
+        });
+    }
+    catch (error) {
+        res.status(400).json({ msg: error });
+    }
+});
+exports.updateStatus = updateStatus;
 //# sourceMappingURL=workers.js.map

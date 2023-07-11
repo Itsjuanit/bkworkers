@@ -54,7 +54,6 @@ export const updateWorker = async (req: Request, res: Response) => {
 }
 
 export const updateStatus = async (req: Request, res: Response) => {
-
     const {id} = req.params; 
 
     const {status} = req.body
