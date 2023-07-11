@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {Schema, model} from 'mongoose'
 interface ITag {
     name: string,

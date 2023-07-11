@@ -1,6 +1,5 @@
-import { Request, Response } from "express"
-import { Tag } from "../models/tag"
-import { Worker } from "../models/worker"
+import { Request, Response } from 'express'
+import { Worker } from '../models/worker'
 
 
 export const createWorker = async (req: Request,res: Response) => {
@@ -37,35 +36,35 @@ export const getWorker = async (req: Request,res: Response) => {
 export const updateWorker = async (req: Request, res: Response) => {
 	console.log(req)
 
-    const {id} = req.params; 
+	const {id} = req.params 
 
-    const {name, tag, phone_number, opinion, status} = req.body
+	const {name, tag, phone_number, opinion, status} = req.body
 
-    try {
-        const worker = await Worker.findByIdAndUpdate(id, {name, tag, phone_number, opinion, status}, {new: true})
+	try {
+		const worker = await Worker.findByIdAndUpdate(id, {name, tag, phone_number, opinion, status}, {new: true})
 
 		res.json({
 			msg: 'worker updated',
 			worker
 		})
-    } catch (error) {
-        res.status(400).json({ msg: error})
-    }
+	} catch (error) {
+		res.status(400).json({ msg: error})
+	}
 }
 
 export const updateStatus = async (req: Request, res: Response) => {
-    const {id} = req.params; 
+	const {id} = req.params 
 
-    const {status} = req.body
+	const {status} = req.body
 
-    try {
-        const worker = await Worker.findByIdAndUpdate(id, {status}, {new: true})
+	try {
+		const worker = await Worker.findByIdAndUpdate(id, {status}, {new: true})
 
 		res.json({
 			msg: 'worker changed status',
 			worker
 		})
-    } catch (error) {
-        res.status(400).json({ msg: error})
-    }
+	} catch (error) {
+		res.status(400).json({ msg: error})
+	}
 }

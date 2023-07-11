@@ -8,22 +8,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 		step((generator = generator.apply(thisArg, _arguments || [])).next())
 	})
 }
-var __importDefault = (this && this.__importDefault) || function (mod) {
-	return (mod && mod.__esModule) ? mod : { 'default': mod }
-}
 Object.defineProperty(exports, '__esModule', { value: true })
-exports.dbConnection = void 0
-const mongoose_1 = __importDefault(require('mongoose'))
-const dbConnection = () => __awaiter(void 0, void 0, void 0, function* () {
-	var _a
-	const mongoConnection = (_a = process.env.MONGO_URL) !== null && _a !== void 0 ? _a : ''
-	try {
-		mongoose_1.default.connect(mongoConnection)
-		console.log('Base de datos online')
-	}
-	catch (error) {
-		console.log(error)
+exports.isRoleValidate = void 0
+const role_1 = require('../models/role')
+const isRoleValidate = (rol = 'USER_ROLE') => __awaiter(void 0, void 0, void 0, function* () {
+	const existeRol = yield role_1.Role.findOne({ rol })
+	if (!existeRol) {
+		throw new Error(`El rol ${rol} no está registrado en la BD`)
 	}
 })
-exports.dbConnection = dbConnection
-//# sourceMappingURL=connectionDB.js.map
+exports.isRoleValidate = isRoleValidate
+//# sourceMappingURL=validators.js.map

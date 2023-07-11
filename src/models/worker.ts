@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {Schema, model} from 'mongoose'
 interface IWorker {
     name: string,
@@ -7,13 +8,13 @@ interface IWorker {
     tag: { type: Schema.Types.ObjectId, ref: 'Tag' },
 }
 
-type Status = 'active' | 'inactive' | 'reject'
+type Status = 'active' | 'inactive' | 'rejected'
 const WorkerSchema = new Schema<IWorker>({
 	name: {type: String},
-    phone_number: {type: String},
-    opinion:  {type: String},
-    status:  {type: String, default: 'inactive'},
-    tag: { type: Schema.Types.ObjectId, ref: 'Tag' },
+	phone_number: {type: String},
+	opinion:  {type: String},
+	status:  {type: String, default: 'inactive'},
+	tag: { type: Schema.Types.ObjectId, ref: 'Tag' },
 })
 
 WorkerSchema.methods.toJSON = function() {

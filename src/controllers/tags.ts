@@ -1,5 +1,5 @@
-import { Request, Response } from "express"
-import { Tag } from "../models/tag"
+import { Request, Response } from 'express'
+import { Tag } from '../models/tag'
 
 
 export const createTag = async (req: Request,res: Response) => {

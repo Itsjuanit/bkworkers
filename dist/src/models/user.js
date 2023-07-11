@@ -11,19 +11,20 @@ var __rest = (this && this.__rest) || function (s, e) {
 	return t
 }
 Object.defineProperty(exports, '__esModule', { value: true })
-exports.Worker = void 0
+exports.User = void 0
 /* eslint-disable @typescript-eslint/no-unused-vars */
 const mongoose_1 = require('mongoose')
-const WorkerSchema = new mongoose_1.Schema({
-	name: { type: String },
-	phone_number: { type: String },
-	opinion: { type: String },
-	status: { type: String, default: 'inactive' },
-	tag: { type: mongoose_1.Schema.Types.ObjectId, ref: 'Tag' },
+const userSchema = new mongoose_1.Schema({
+	name: { type: String, required: false },
+	lastname: { type: String, required: false },
+	email: { type: String, required: false },
+	password: { type: String, required: false },
+	rol: { type: String, default: 'USER_ROLE', enum: ['ADMIN_ROLE', 'USER_ROLE'] },
+	status: { type: Boolean, default: true },
 })
-WorkerSchema.methods.toJSON = function () {
-	const _a = this.toObject(), { __v } = _a, worker = __rest(_a, ['__v'])
-	return worker
+userSchema.methods.toJSON = function () {
+	const _a = this.toObject(), { __v, password } = _a, user = __rest(_a, ['__v', 'password'])
+	return user
 }
-exports.Worker = (0, mongoose_1.model)('Worker', WorkerSchema)
-//# sourceMappingURL=worker.js.map
+exports.User = (0, mongoose_1.model)('User', userSchema)
+//# sourceMappingURL=user.js.map

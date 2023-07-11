@@ -3,6 +3,8 @@ import { dbConnection } from '../db/connectionDB'
 import cors from 'cors'
 import workersRoutes from '../routes/workersRoutes'
 import tagsRoutes from '../routes/tagsRoutes'
+import userRoutes from '../routes/userRoutes'
+import authRoutes from '../routes/authRoutes'
 
 export class Server {
 
@@ -10,10 +12,10 @@ export class Server {
 	private app : Application
 	private path = {
 		workers: '/api/worker',
-        tags: '/api/tag'
-
+		tags: '/api/tag',
+		auth: '/api/auth',
+		users: '/api/user',
 	}
-
 
 	constructor(){
 		this.app = express()
@@ -23,21 +25,20 @@ export class Server {
 		this.routes()
 	}
 
-
 	middlewares() {
 		this.app.use(cors())
 		this.app.use(express.json())
 	}
 
-
 	async connectionDB() {
 		await dbConnection()
 	}
 
-
 	routes() {
 		this.app.use(this.path.workers, workersRoutes)
 		this.app.use(this.path.tags, tagsRoutes)
+		this.app.use(this.path.users,userRoutes)
+		this.app.use(this.path.auth, authRoutes)
 	}
     
 	listen(){
@@ -45,5 +46,4 @@ export class Server {
 			console.log(`Server run in ${this.port}`)
 		})
 	}
-
 }

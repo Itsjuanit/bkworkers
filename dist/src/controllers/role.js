@@ -9,34 +9,26 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 	})
 }
 Object.defineProperty(exports, '__esModule', { value: true })
-exports.getTag = exports.createTag = void 0
-const tag_1 = require('../models/tag')
-const createTag = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-	const { name } = req.body
+exports.getRoles = exports.createRole = void 0
+const role_1 = require('../models/role')
+const createRole = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+	const { rol } = req.body
 	try {
-		const tag = new tag_1.Tag({ name })
-		yield tag.save()
+		const role = new role_1.Role({ rol })
+		yield role.save()
 		res.json({
-			msg: 'Tag created',
-			tag
+			msg: 'Rol Creado',
+			role
 		})
 	}
 	catch (error) {
 		res.status(400).json({ msg: error })
 	}
 })
-exports.createTag = createTag
-const getTag = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-	const { name } = req.query
-	if (name) {
-		const tags = yield tag_1.Tag.find({ name })
-		if (!tags.length) {
-			return res.json({ msg: 'la busqueda no arrojo resultados' })
-		}
-		return res.json({ tags })
-	}
-	const tags = yield tag_1.Tag.find()
-	res.json({ tags })
+exports.createRole = createRole
+const getRoles = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+	const roles = yield role_1.Role.find()
+	res.json({ roles })
 })
-exports.getTag = getTag
-//# sourceMappingURL=tags.js.map
+exports.getRoles = getRoles
+//# sourceMappingURL=role.js.map
